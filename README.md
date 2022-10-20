@@ -1,11 +1,14 @@
 # New-Music-Playlist
 A project that compiles a monthly playlist with new music from you followed artists, and possibly some recommendations.
 
-Outline of steps:
-- Setup authentication to spotify API in order to make calls to the api for a data query.
-- function to get followed artists.
-- function to get all new albums, or singles of all followed artists.
-- function to get all individual tracks off of thoise albums.
-- function to create a playlist with our selected tracks.
-- email notification.
-- script executes on the first of the month, and searches for new music within a month.
+What's Done:
+- script runs as intended for me.
+- organized into helper functions.
+- cleaned up code all around and made it more readable.
+
+To Do:
+- add exception handler: user follows more than 50 artists.
+- add exception: add more than 100 songs to playlist.
+- creative elements: playlist image and description, possibly with ai api.
+- functionality: create app like structure to handle more than one user, and to run on time.
+- keep playlist updated maybe.
