@@ -1,6 +1,4 @@
 
-
-
 class Artist:
 
     def __init__(self, name, spotify_id):
