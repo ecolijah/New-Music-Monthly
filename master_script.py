@@ -1,8 +1,22 @@
+import os
+
 import spotipy
+from dotenv import load_dotenv
 from spotipy.oauth2 import SpotifyOAuth
+
 import helpers
+# env variables
+load_dotenv()
 
+# SPOTIPY_CLIENT_ID = os.getenv('SPOTIPY_CLIENT_ID')
+# SPOTIPY_CLIENT_SECRET = os.getenv('SPOTIPY_CLIENT_SECRET')
+# SPOTIPY_REDIRECT_URI = os.getenv('SPOTIPY_REDIRECT_URI')
 
+SPOTIPY_CLIENT_ID = '5b2e0915fcbb42f6a03f85d4bf8a7391'
+SPOTIPY_CLIENT_SECRET = '6b51587483274dbabd51391be05dafcd'
+SPOTIPY_REDIRECT_URI = 'https://poopysite000.com/callback/'
+
+print(SPOTIPY_CLIENT_ID)
 # This is a very rough first draft at new monthly playlists.
 
 # playlist id -- constant
@@ -10,7 +24,7 @@ playlist_id = "4V8Is0FlL4aNGbAYorwwqp"
 scope = 'user-follow-read playlist-modify-private'
 
 # creates and authorises our spotipy object with both necessary scopes.
-sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
+sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET, redirect_uri=SPOTIPY_REDIRECT_URI, scope=scope))
 
 # gets current user data
 user = sp.current_user()

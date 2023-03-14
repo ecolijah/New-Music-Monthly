@@ -3,7 +3,6 @@ from dateutil.relativedelta import relativedelta
 import artist
 from collections import OrderedDict
 
-
 def is_new(release_date):
     """
     :param release_date: release date of album.
@@ -51,15 +50,15 @@ def get_artist_albums(artists, sp):
         for i, item in enumerate(artist_albums['items']):
             if is_new(item['release_date']):
                 temp_album_name = item['name']
-                temp_album_id = item['id']
-                x.albums.update({temp_album_name: temp_album_id})
+                temp_album_uri = item['uri']
+                x.albums.update({temp_album_name: temp_album_uri})
                 print(x.name + " - " + temp_album_name)
 
         for i, item in enumerate(artist_singles['items']):
             if is_new(item['release_date']):
                 temp_album_name = item['name']
-                temp_album_id = item['id']
-                x.albums.update({temp_album_name: temp_album_id})
+                temp_album_uri = item['uri']
+                x.albums.update({temp_album_name: temp_album_uri})
                 print(x.name + " - " + temp_album_name)
 
     return artists
@@ -69,19 +68,19 @@ def get_artist_tracks(artists, sp):
     """
     :param artists: list of artist objects.
     :param sp: spotipy object for api queries.
-    :return: a list containing desired song ids.
+    :return: a list containing desired song uris.
     """
-    song_ids_to_add = []
+    song_uris_to_add = []
     for x in artists:
         for key in x.albums:
-            temp_album_id = x.albums[key]
-            songs_in_album = sp.album_tracks(temp_album_id)
+            temp_album_uri = x.albums[key]
+            songs_in_album = sp.album_tracks(temp_album_uri)
 
             for i, item in enumerate(songs_in_album['items']):
-                tmp_song_id = item['id']
-                song_ids_to_add.append(tmp_song_id)
+                tmp_song_uri = item['uri']
+                song_uris_to_add.append(tmp_song_uri)
 
-    return song_ids_to_add
+    return song_uris_to_add
 
 
 def remove_duplicates(songs):
@@ -89,6 +88,9 @@ def remove_duplicates(songs):
     :param songs: list of songs, may have duplicates.
     :return: new list of songs, no duplicates.
     """
+
     # preserves order, removes duplicates
     tmp_list = list(OrderedDict.fromkeys(songs))
     return tmp_list
+
+    #return list(set(songs))
